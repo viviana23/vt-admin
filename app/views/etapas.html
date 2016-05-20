@@ -1,0 +1,80 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-12 col-lg-offset-1  main">
+            <div class=" row breadcrumb login-nav color-blue">
+                <div class="col-lg-2 col-md-4 col-sm-4 ">
+                    <a id="link-1" ng-href="/#/zonas" ng-click="value = 1"><h4>Zonas</h4></a>
+                </div>
+                <div class="col-lg-2 col-md-4 col-sm-4">
+                    <a id="link-1" ng-href="/#/etapas" ng-click="value = 1"><h4>Etapas</h4></a>
+                </div>
+                <div class="col-lg-2 col-md-4 col-sm-4">
+                    <a id="link-1" ng-href="/#/list_zonas" ng-click="value = 1"><h4>Filas</h4></a>
+                </div>
+                <div class="col-lg-2 col-md-4 col-sm-4">
+                    <a id="link-1" ng-href="/#/zonaetapa" ng-click="value = 1"><h4>Zonas-Etapas</h4></a>
+                </div>
+                <div class="col-md-4 text-right session-info">
+                    <img src="images/apple-touch-icon.png" height="35" width="35">
+                    <span class="user">{{usuario}}</span><img src="images/logout.png">
+                </div>
+            </div>
+            <div class="row gpr-form">
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <form>
+                        <h4>ETAPAS</h4>
+                        </br>
+                        <div class="form-group">
+                            <label for="gpr-id">Nombre de la Etapa</label>
+                            <input type="text" class="form-control" ng-model="eef.descripcion" name="gpr-id" id="gpr-id" placeholder="Etapa">
+                        </div>
+                        <div class="form-group">
+                            <label for="gpr-name">Fecha de Incio</label>
+                            </br>
+                            <input time="false" date="true" mdc-datetime-picker="" type="text" id="fecha_inicio" placeholder="Fecha de Incio" ng-model="eef.fecha_inicio" min-date="minDate" max-date="maxDate" class=" md-input">
+                        </div>
+                        <div class="form-group">
+                            <label for="gpr-token">Fecha Fin</label>
+                            </br>
+                            <input time="false" date="true" mdc-datetime-picker="" type="text" id="fecha_fin" placeholder="Fecha Fin" ng-model="eef.fecha_fin" min-date="minDate" max-date="maxDate" class=" md-input">
+                        </div>
+                        </br>
+                        </br>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                     <button ng-click="doGuardar()" type="submit" class="btn btn-evento" ng-bind="buttons.register"></button>
+                                    <button ng-click="zef=[];buttons.register='Guardar'" type="submit" class="btn btn-evento">Cancelar</button>
+                                    <button  ng-click="doEliminar()" ng-bind="buttons.eliminar" type="submit" class="btn btn-evento">Eliminar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <table class="table t gpr-table">
+                        <thead>
+                            <tr>
+                                <th>Etapa</th>
+                                <th>Fecha Inicio</th>
+                                <th>Fecha Fin</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody dir-paginate="op in eventos.etapas|itemsPerPage:4" pagination-id="detail">
+                            <tr ng-click="editar(op.id)">
+                                <td>{{op.descripcion}}</td>
+                                <td>{{op.fecha_inicio}}</td>
+                                <td>{{op.fecha_fin}}</td>
+                                <td><a>Editar</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="text-center">
+                        <dir-pagination-controls max-size="5" pagination-id="detail" direction-links="true" boundary-links="true">
+                        </dir-pagination-controls>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

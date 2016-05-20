@@ -1,0 +1,149 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-12 col-lg-offset-1  main">
+            <div class=" row breadcrumb login-nav color-blue">
+                <div class="col-lg-2 col-md-4 col-sm-4 ">
+                    <a id="link-1" ng-href="/#/zonas" ng-click="value = 1"><h4>Zonas</h4></a>
+                </div>
+                <div class="col-lg-2 col-md-4 col-sm-4">
+                    <a id="link-1" ng-href="/#/etapas" ng-click="value = 1"><h4>Etapas</h4></a>
+                </div>
+                <div class="col-lg-2 col-md-4 col-sm-4">
+                    <a id="link-1" ng-href="/#/list_zonas" ng-click="value = 1"><h4>Filas</h4></a>
+                </div>
+                <div class="col-lg-2 col-md-4 col-sm-4">
+                    <a id="link-1" ng-href="/#/zonaetapa" ng-click="value = 1"><h4>Zonas-Etapas</h4></a>
+                </div>
+                <div class="col-md-4 text-right session-info">
+                    <img src="images/apple-touch-icon.png" height="35" width="35">
+                    <span class="user">{{usuario}}</span><img src="images/logout.png">
+                </div>
+            </div>
+            <div class="row gpr-form">
+                <div class="col-lg-8 col-md-8 col-sm-8">
+                    <form>
+                        <h4>Detalles del Evento</h4>
+                        </br>
+                        <div class="row ">
+                            <div class="col-lg-6 col-md-6 col-sm-6">
+                                <div class="form-group">
+                                    <label for="gpr-Nombre">Nombre</label>
+                                    <input type="text" class="form-control" ng-model="eef.nombre" id="gpr-Nombre" placeholder="Nombre">
+                                </div>
+                                </br>
+                                <div class="form-group">
+                                    <label for="gpr-Lugar">Lugar</label>
+                                    </br>
+                                    <ol class="nya-bs-select" ng-model="eef.lugar_id" data-live-search="true">
+                                        <li class="nya-bs-option" data-value="{{option.id}}" ng-repeat="option in lugares| orderBy:'nombre'">
+                                            <a>{{option.nombre}} - {{option.direccion}}</a>
+                                        </li>
+                                    </ol>
+                                </div>
+                                </br>
+                                <div class="form-group">
+                                    <label for="gpr-Fecha">Fecha</label>
+                                    </br>
+                                    <input time="false" date="true" mdc-datetime-picker="" type="text" id="date" placeholder="Date" ng-model="eef.fecha_evento" min-date="minDate" max-date="maxDate" class=" md-input">
+                                </div>
+                                </br>
+                                <div class="form-group">
+                                    <label for="gpr-estatus">Estatus</label>
+                                    <select class="form-control" ng-init="eef.estatus='Activo'" ng-model="eef.estatus" name="gpr-estatus" id="gpr-estatus">
+                                        <option value="Activo">Activo</option>
+                                        <option value="Cancelado">Cancelado</option>
+                                        <option value="Agotado">Agotado</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6">
+                                <div class="form-group">
+                                    <label for="gpr-Categoria">Categoria</label>
+                                    <select class="form-control" ng-model="eef.categoria" id="gpr-Categoria">
+                                        <option value="Musica">Musica</option>
+                                        <option value="Teatro">Teatro</option>
+                                        <option value="Conciertos">Conciertos</option>
+                                    </select>
+                                </div>
+                                </br>
+                                <div class="form-group">
+                                    <label for="gpr-Direccion">Direccion</label>
+                                    <input type="text" class="form-control" ng-model="eef.direccion" id="gpr-Direccion" placeholder="Direccion">
+                                </div>
+                                </br>
+                                <div class="form-group">
+                                    <label for="gpr-Hora">Hora</label>
+                                    </br>
+                                    <input date="false" time="true" mdc-datetime-picker="" type="text" id="Hora" placeholder="Time" format="hh:mm:ss" ng-model="eef.hora_evento" min-date="minDate" max-date="maxDate" class=" md-input">
+                                </div>
+                            </div>
+                        </div>
+                        </br>
+                        </br>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <button ng-click="doGuardar()" type="submit" ng-bind="buttons.register" class="btn btn-evento">Guardar</button>
+                                    <button ng-click="eef=[];buttons.register='Guardar'" type="submit" class="btn btn-evento">Cancelar</button>
+                                    <button ng-click="doEliminar()" ng-bind="buttons.eliminar" type="submit" class="btn btn-evento">Eliminar</button>
+                                </div>
+                            </div>
+                            {{id}}
+                        </div>
+                    </form>
+                </div>
+                </br>
+                </br>
+                </br>
+                <div class="col-lg-4 col-md-4 col-sm-4">
+                    <div class="form-group ">
+                        <div class="polig"> Foto evento . . . </div>
+                        <br>
+                        <button ng-click="doCargar()" type="submit" class="btn btn-cargar">Cargar</button>
+                    </div>
+                    <div class="form-group">
+                        <label for="gpr-Direccion"></label>
+                        <table class="table ">
+                            <thead>
+                                <tr>
+                                    <th>NOMBRE</th>
+                                    <th>ROL</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody ng-repeat="op in eventos.usuarios| filter:consultaPersonalizada">
+                                <tr>
+                                    <td>{{op.name}}</td>
+                                    <td>{{op.pivot.rol}}</td>
+                                    <td ng-click="editar(op.id)"><img src="images/cancelar.png"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <button ng-click="open()" type="submit" class="btn btn-cargar">Nuevo Usuario</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/ng-template" id="myModalContent.html">
+    <div class="gpr-form">
+        <div class="form-group">
+            <label for="gpr-Nombre">Usuario</label>
+            <input type="text" class="form-control" ng-model="eef.email" id="usuario" placeholder="Usuario">
+        </div>
+        </br>
+        <div class="form-group">
+            <label for="gpr-Lugar">Rol de Usuario</label>
+            <select class="form-control" ng-model="eef.rol" id="rol">
+                <option value="superadmin">SUPERADMIN</option>
+                <option value="admin">ADMIN</option>
+                <option value="user">USER</option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-evento" type="button" ng-click="ok()">GUARDAR</button>
+        <button class="btn btn-evento" type="button" ng-click="cancel()">CANCELAR</button>
+    </div>
+</script>

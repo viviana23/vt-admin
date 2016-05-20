@@ -1,0 +1,55 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-12 col-lg-offset-1  main">
+            <div class=" row breadcrumb login-nav color-blue">
+                <div class="col-lg-2 col-md-4 col-sm-4 ">
+                    <a id="link-1" ng-href="/#/zonas" ng-click="value = 1"><h4>Zonas</h4></a>
+                </div>
+                <div class="col-lg-2 col-md-4 col-sm-4">
+                    <a id="link-1" ng-href="/#/etapas" ng-click="value = 1"><h4>Etapas</h4></a>
+                </div>
+                <div class="col-lg-2 col-md-4 col-sm-4">
+                    <a id="link-1" ng-href="/#/list_zonas" ng-click="value = 1"><h4>Filas</h4></a>
+                </div>
+                <div class="col-lg-2 col-md-4 col-sm-4">
+                    <a id="link-1" ng-href="/#/zonaetapa" ng-click="value = 1"><h4>Zonas-Etapas</h4></a>
+                </div>
+                <div class="col-md-4 text-right session-info">
+                    <img src="images/apple-touch-icon.png" height="35" width="35">
+                    <span class="user">{{usuario}}</span><img src="images/logout.png">
+                </div>
+            </div>
+            <div id="infoi" flash-message="3000"></div>
+            <div class="row gpr-form">
+                <h4> Agregar Filas</h4>
+                </br>
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <table class="table gpr-table">
+                        <thead>
+                            <tr>
+                                <th>Zona</th>
+                                <th>Tipo Capacidad</th>
+                                <th>Capacidad</th>
+                                <th>Precio</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody  dir-paginate="op in eventos.zonas|filter:'porzona'|itemsPerPage:6" pagination-id="detail">
+                            <tr ng-click="ver(op.id,eventos.zonas.indexOf(op))">
+                                <td>{{op.nombre}}</td>
+                                <td>{{op.capacidadtipo}}</td>
+                                <td>{{op.capacidad}}</td>
+                                <td>{{op.precio}}</td>
+                                <td><a>Ver</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="text-center">
+                        <dir-pagination-controls max-size="5" pagination-id="detail" direction-links="true" boundary-links="true">
+                        </dir-pagination-controls>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

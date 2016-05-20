@@ -1,0 +1,118 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <!-- build:css(.) styles/vendor.css -->
+    <!-- bower:css -->
+    <link rel="stylesheet" href="bower_components/nya-bootstrap-select/dist/css/nya-bs-select.css" />
+    <link rel="stylesheet" href="bower_components/angularjs-datepicker/dist/angular-datepicker.min.css" />
+    <link rel="stylesheet" href="bower_components/angular-material/angular-material.css" />
+    <link rel="stylesheet" href="bower_components/angular-material-datetimepicker/css/material-datetimepicker.min.css" />
+    <link rel="stylesheet" href="bower_components/angular-xeditable/dist/css/xeditable.css" />
+    <link rel="stylesheet" href="bower_components/angular-flash-alert/dist/angular-flash.css" />
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:css(.tmp) styles/main.css -->
+    <link rel="stylesheet" href="styles/main.css">
+    <!-- endbuild -->
+  </head>
+  <body ng-app="panelNgApp">
+    <!--[if lte IE 8]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+    <!-- Add your site or application content here -->
+
+    
+   <div class="container-fluid">
+    
+        <div class="row">
+            <div class="col-sm-2 col-lg-1 col-md-1 sidebar ">
+                <div class="logo">
+                    <img src="images/logo.png" height="19" width="90">
+                </div>
+                <ul class="nav nav-sidebar text-center">
+                    <li>
+                        <a href="/#/list_eventos"><img src="images/tickets.png" height="50" width="52"></a>
+                
+                    </li>
+                    <li>
+                        <a href="#"><img src="images/acreditacion.png" height="50" width="52"></a>
+                    </li>
+                    <li>
+                        <a href="#"><img src="images/report.png" height="50" width="52"></a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1  main">
+                 <div ng-view=""></div>
+            </div>
+        </div>
+    </div>
+     
+
+    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
+     <script>
+       !function(A,n,g,u,l,a,r){A.GoogleAnalyticsObject=l,A[l]=A[l]||function(){
+       (A[l].q=A[l].q||[]).push(arguments)},A[l].l=+new Date,a=n.createElement(g),
+       r=n.getElementsByTagName(g)[0],a.src=u,r.parentNode.insertBefore(a,r)
+       }(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+       ga('create', 'UA-XXXXX-X');
+       ga('send', 'pageview');
+    </script>
+
+    <!-- build:js(.) scripts/vendor.js -->
+    <!-- bower:js -->
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="bower_components/angular-touch/angular-touch.js"></script>
+    <script src="bower_components/angular-storage/dist/angular-storage.js"></script>
+    <script src="bower_components/angular-jwt/dist/angular-jwt.js"></script>
+    <script src="bower_components/nya-bootstrap-select/dist/js/nya-bs-select.js"></script>
+    <script src="bower_components/angularjs-datepicker/dist/angular-datepicker.min.js"></script>
+    <script src="bower_components/momentjs/moment.js"></script>
+    <script src="bower_components/angular-aria/angular-aria.js"></script>
+    <script src="bower_components/angular-messages/angular-messages.js"></script>
+    <script src="bower_components/angular-material/angular-material.js"></script>
+    <script src="bower_components/angular-material-datetimepicker/js/angular-material-datetimepicker.min.js"></script>
+    <script src="bower_components/moment/moment.js"></script>
+    <script src="bower_components/angular-moment/angular-moment.js"></script>
+    <script src="bower_components/angular-xeditable/dist/js/xeditable.js"></script>
+    <script src="bower_components/ng-lodash/build/ng-lodash.js"></script>
+    <script src="bower_components/angular-flash-alert/dist/angular-flash.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="bower_components/angularUtils-pagination/dirPagination.js"></script>
+    <!-- endbower -->
+    <!-- endbuild -->
+
+        <!-- build:js({.tmp,app}) scripts/scripts.js -->
+        <script src="scripts/app.js"></script>
+        <script src="scripts/controllers/main.js"></script>
+        <script src="scripts/controllers/about.js"></script>
+        <script src="scripts/controllers/login.js"></script>
+        <script src="scripts/controllers/etapas.js"></script>
+        <script src="scripts/controllers/eventos.js"></script>
+        <script src="scripts/controllers/zonas.js"></script>
+        <script src="scripts/services/eventos.js"></script>
+        <script src="scripts/services/lugarapi.js"></script>
+        <script src="scripts/controllers/tipo_zona.js"></script>
+        <script src="scripts/controllers/lugar.js"></script>
+        <script src="scripts/services/tipo_zonasapi.js"></script>
+        <script src="scripts/controllers/filas.js"></script>
+        <script src="scripts/controllers/zonaetapa.js"></script>
+        <script src="scripts/controllers/list_eventos.js"></script>
+        <script src="scripts/controllers/usuarios.js"></script>
+        <script src="scripts/services/usuariosapi.js"></script>
+        <script src="scripts/controllers/list_zonas.js"></script>
+        <!-- endbuild -->

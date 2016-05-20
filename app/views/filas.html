@@ -1,0 +1,131 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-12 col-lg-offset-1  main">
+            <div class=" row breadcrumb login-nav color-blue">
+                <div class="col-lg-2 col-md-4 col-sm-4 ">
+                    <a id="link-1" ng-href="/#/zonas" ng-click="value = 1"><h4>Zonas</h4></a>
+                </div>
+                <div class="col-lg-2 col-md-4 col-sm-4">
+                    <a id="link-1" ng-href="/#/etapas" ng-click="value = 1"><h4>Etapas</h4></a>
+                </div>
+                <div class="col-lg-2 col-md-4 col-sm-4">
+                    <a id="link-1" ng-href="/#/list_zonas" ng-click="value = 1"><h4>Filas</h4></a>
+                </div>
+                <div class="col-lg-2 col-md-4 col-sm-4">
+                    <a id="link-1" ng-href="/#/zonaetapa" ng-click="value = 1"><h4>Zonas-Etapas</h4></a>
+                </div>
+                <div class="col-md-4 text-right session-info">
+                    <img src="images/apple-touch-icon.png" height="35" width="35">
+                    <span class="user">{{usuario}}</span><img src="images/logout.png">
+                </div>
+            </div>
+            <div class="row gpr-form ">
+                <form name="outerForm" class="tab-form-demo ">
+                    <uib-tabset active="activeForm">
+                        <uib-tab index="0" heading="Sin Mapa">
+                            <ng-form name="nestedForm">
+                                </br>
+                                <div class="col-lg-6 col-md-6 col-sm-6">
+                                    <div class="row ">
+                                        <div class="col-lg-6 col-md-6 col-sm-6">
+                                            <div class="form-group">
+                                                <label for="Descripcion">Descripcion</label>
+                                                <input type="text" class="form-control" ng-model="fef.descripcion" name="descripcion" id="descripcion" placeholder="Descripcion">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="Capacidad">Capacidad</label>
+                                                <input type="text" class="form-control" ng-model="fef.capacidad" name="capacidad" id="capacidad" placeholder="capacidad">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6 col-sm-6">
+                                            <div class="form-group">
+                                                <label for="Tipo">Tipo</label>
+                                                <select class="form-control" ng-model="fef.tipo" id="gpr-Estatus">
+                                                    <option value="Mesa">MESA</option>
+                                                    <option value="Fila">FILA</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="Estatus">Estatus</label>
+                                                <select class="form-control" ng-init="fef.estatus='Activo'" ng-model="fef.estatus" id="gpr-Estatus">
+                                                    <option value="Activo">ACTIVO</option>
+                                                    <option value="inactivo">INACTIVO</option>
+                                                    <option value="bloqueado">BLOQUEADO</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    </br>
+                                    </br>
+                                    <div class="row ">
+                                        <div class="col-lg-12 ">
+                                            <div class="form-group">
+                                                <button ng-click="doGuardar(fef)" type="submit" class="btn btn-evento" ng-bind="buttons.register">Guardar</button>
+                                                <button ng-click="fef=[];buttons.register='Guardar'" type="submit" class="btn btn-evento">Cancelar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {{id_zona}} {{id}}
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-6">
+                                    <table class="table  gpr-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Fila</th>
+                                                <th>Tipo</th>
+                                                <th>Capacidad</th>
+                                                <th>Estatus</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody >
+                                            <tr dir-paginate="op in eventos.zonas[indexzonas].filas | filter:consultaPersonalizada |itemsPerPage:4 " pagination-id="detail" ng-click="editar(op.id,$index)">
+                                                <td>{{op.descripcion}}</td>
+                                                <td>{{op.tipo}}</td>
+                                                <td>{{op.capacidad}}</td>
+                                                <td>{{op.estatus}}</td>
+                                                <td><a>Editar</a></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                     <div class="text-center">
+                        <dir-pagination-controls max-size="5" pagination-id="detail" direction-links="true" boundary-links="true">
+                        </dir-pagination-controls>
+                    </div>
+                                </div>
+                            </ng-form>
+                        </uib-tab>
+                        <uib-tab index="1" heading="Con Mapa">
+                            </br>
+                             </br>
+                            <div class="row ">
+                                <div class="col-lg-6 ">
+                                    <div class="panel panel-default alto-panel">
+                                        <label for="Capacidad">Inserte aqui su json</label>
+                                        </br>
+                                        <textarea class="json-mapa " style="overflow:auto; " rows="20" cols="40" maxlength="150000" data-ng-minLength="1" ng-model="fef.mapa">
+                                        </textarea>
+                                        </br>
+                                        </br>
+                                    </div>
+                                    <button ng-click="doGuardarmapa(fef)" type="submit" class="btn btn-evento" ng-bind="buttons.register"></button>
+                                    <button ng-click="fef=[];buttons.register='Guardar'" type="submit" class="btn btn-evento">Cancelar</button>
+                                    <button  ng-click="doEliminar()" ng-bind="buttons.eliminar" type="submit" class="btn btn-evento">Eliminar</button>
+                                    
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-6">
+                                    <div class="panel panel-default alto-panel">
+                                        <div>
+                                            <p class="selecclugar">Mapa de la zona</p>
+                                        </div>
+                                        <div> <img src="../images/lugar.png" class="img-responsive center-block"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </uib-tab>
+                    </uib-tabset>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div>
