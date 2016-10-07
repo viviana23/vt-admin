@@ -9,9 +9,11 @@
  */
 angular.module('panelNgApp')
     .controller('FilasCtrl', function($scope, $http, lodash, $location, $log, config, tipo_zonasApi, eventosApi, $filter, $window) {
+        $scope.myvalue = false;
         $scope.id = $window.sessionStorage.getItem('id');
         $scope.id_zona = $window.sessionStorage.getItem('id_zona');
         $scope.indexzonas = $window.sessionStorage.getItem('indexzonas');
+        $scope.usuario = localStorage.getItem('usuario');
 
         $scope.buttons = {
             "register": "Guardar",
@@ -40,6 +42,9 @@ angular.module('panelNgApp')
             if (typeof fef.id === 'undefined') {
                 console.log($scope.fef);
                 eventosApi.save({ id: $scope.id, act: 'fila' }, { descripcion: fef.descripcion, capacidad: fef.capacidad, tipo: fef.tipo, estatus: fef.estatus, zona_id: $scope.id_zona }, function(data) {
+
+                    $scope.fef = {};
+                    swal("Fila Registrada!", "", "success");
                     console.log(data);
 
                 });
@@ -49,9 +54,10 @@ angular.module('panelNgApp')
 
                 eventosApi.update({ id: $scope.id, act: 'fila', id2: fef.id }, { descripcion: fef.descripcion, capacidad: fef.capacidad, tipo: fef.tipo, estatus: fef.estatus, zona_id: $scope.id_zona },
                     function(data) {
-                        var message = 'zonaetapa Editada!';
-                        Flash.create('success', message, 'custom-class');
-                        $scope.fef = [];
+                        swal("Fila Editada!", "", "success");
+                        $scope.myvalue = false;
+
+                        $scope.fef = {};
                         $scope.buttons.register = "Guardar";
                     });
 
@@ -67,10 +73,16 @@ angular.module('panelNgApp')
 
         }
         $scope.editar = function(id, index) {
+            $scope.myvalue = true;
             var data = $scope.eventos.zonas[$scope.indexzonas].filas[index];
             console.log(data)
             $scope.fef = data;
-
             $scope.buttons.register = "Editar";
+        }
+
+        $scope.Cancelar = function(id) {
+            $scope.fef = {};
+            $scope.myvalue = false;
+
         }
     });

@@ -46,6 +46,9 @@ module.exports = function(config) {
       'bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
       'bower_components/angularUtils-pagination/dirPagination.js',
       'bower_components/angular-mocks/angular-mocks.js',
+      'bower_components/angular-flash/angular-flash.js',
+      'bower_components/sweetalert/dist/sweetalert.min.js',
+      'bower_components/ng-sweet-alert/ng-sweet-alert.js',
       // endbower
       'app/scripts/**/*.js',
       'test/mock/**/*.js',

@@ -8,9 +8,9 @@
  * Controller of the panelNgApp
  */
 angular.module('panelNgApp')
-    .controller('EventosCtrl', function($scope, lodash, $http, Flash, $location, config, eventosApi, lugarApi, $window, $uibModal, $log) {
-       
+    .controller('EventosCtrl', function($scope, lodash, $http, $location, config, eventosApi, lugarApi, $window, $uibModal, $log) {
 
+        $scope.myvalue = false;
         $scope.id = $window.sessionStorage.getItem('id');
         $scope.usuario = localStorage.getItem('usuario');
 
@@ -23,17 +23,20 @@ angular.module('panelNgApp')
         lugarApi.get({}, function(data) {
             $scope.lugares = data.data;
             console.log(data)
-        }); // get() re
-
-
-        eventosApi.get({ id: $scope.id, act: 'all' }, function(data) {
-            $scope.eventos = data.data;
-            $scope.eef = $scope.eventos;
-
-            console.log(data)
         });
 
+        if ($scope.id = $window.sessionStorage.getItem('id')) {
+            $scope.buttons.register = "Editar";
+            $scope.myvalue = true;
+            eventosApi.get({ id: $scope.id, act: 'all' }, function(data) {
+                $scope.eventos = data.data;
+                $scope.eef = $scope.eventos;
 
+                console.log(data)
+
+            });
+
+        }
 
         $scope.consultaPersonalizada = function(op) {
             if ((op.pivot.rol === 'admin') || (op.pivot.rol === 'user')) {
@@ -46,11 +49,12 @@ angular.module('panelNgApp')
 
         $scope.doGuardar = function() {
 
-            $scope.HHmmss = moment($scope.eef.hora_evento).format('hh:mm:ss');
+            $scope.HHmmss = moment($scope.eef.hora_evento).format('hh:mm');
             if (typeof $scope.eef.id === 'undefined') {
 
                 eventosApi.save({ nombre: $scope.eef.nombre, categoria: $scope.eef.categoria, lugar: "pues si", direccion: $scope.eef.direccion, fecha_evento: $scope.eef.fecha_evento, hora_evento: $scope.HHmmss, lugar_id: $scope.eef.lugar_id, estatus: $scope.eef.estatus },
                     function(response) {
+                        swal("Evento Registrado!", "", "success");
                         console.log(response.data.id);
                         $window.sessionStorage.setItem('id', response.data.id);
                         $scope.id = response.data.id;
@@ -63,9 +67,9 @@ angular.module('panelNgApp')
 
                 eventosApi.update({ id: $scope.eef.id }, $scope.eef,
                     function(data) {
-                        var message = 'color de zona Editado!';
-                        Flash.create('success', message, 'custom-class');
-                        $scope.eef = [];
+                        $scope.myvalue = false;
+                        swal("Evento Editado!", "", "success");
+                        $scope.eef = {};
                         $scope.buttons.register = "Guardar";
 
                     });
@@ -75,14 +79,15 @@ angular.module('panelNgApp')
         }
 
         $scope.doEliminar = function() {
-            eventosApi.destroy({ id: $scope.eef.id },
-                function(data) {
-                    var message = 'color de zona Editado!';
-                    Flash.create('success', message, 'custom-class');
-                    $scope.eef = [];
-                    $scope.buttons.register = "Guardar";
+            swal({ title: "Desea eliminar este Evento?", type: "warning", showCancelButton: true, confirmButtonColor: "#DD6B55", confirmButtonText: "Si, Eliminar!", closeOnConfirm: false },
+                function() {
+                    eventosApi.destroy({ id: $scope.eef.id },
+                        function(data) {
+                            $scope.eef = {};
+                            $scope.buttons.register = "Guardar";
+                            swal("Evento Eliminado!", "", "success");
+                        });
                 });
-
 
         };
 
@@ -90,9 +95,7 @@ angular.module('panelNgApp')
             console.log(id)
             eventosApi.destroy({ id: $scope.id, act: 'users', id2: id },
                 function(data) {
-                    var message = 'color de zona Editado!';
-                    Flash.create('success', message, 'custom-class');
-                    $scope.eef = [];
+                    $scope.eef = {};
                     $scope.buttons.register = "Guardar";
                     eventosApi.get({ id: $scope.id, act: 'all' }, function(data) {
                         $scope.eventos = data.data;
@@ -100,6 +103,14 @@ angular.module('panelNgApp')
                         console.log(data)
                     });
                 });
+
+
+        }
+
+        $scope.Cancelar = function(id) {
+            $scope.eef = {};
+            $scope.myvalue = false;
+
 
 
         }

@@ -16,65 +16,65 @@
                 </div>
                 <div class="col-md-4 text-right session-info">
                     <img src="images/apple-touch-icon.png" height="35" width="35">
-                    <span class="user">{{usuario}}</span><img src="images/logout.png">
+                    <span class="user">{{::usuario}}</span><img src="images/logout.png">
                 </div>
             </div>
             <div class="row gpr-form">
                 <div class="col-lg-8 col-md-8 col-sm-8">
-                    <form>
+                    <form name="formeventos" novalidate>
                         <h4>Detalles del Evento</h4>
                         </br>
                         <div class="row ">
                             <div class="col-lg-6 col-md-6 col-sm-6">
-                                <div class="form-group">
+                                <div class="form-group" ng-class="{'has-error':formeventos.nombre.$invalid && formeventos.nombre.$dirty}">
                                     <label for="gpr-Nombre">Nombre</label>
-                                    <input type="text" class="form-control" ng-model="eef.nombre" id="gpr-Nombre" placeholder="Nombre">
+                                    <input type="text" class="form-control" ng-model="eef.nombre" id="gpr-Nombre" name="nombre" placeholder="Nombre" required> <span style="color:red" ng-if="formeventos.nombre.$invalid && formeventos.nombre.$dirty">campo requerido</span>
                                 </div>
                                 </br>
                                 <div class="form-group">
                                     <label for="gpr-Lugar">Lugar</label>
                                     </br>
-                                    <ol class="nya-bs-select" ng-model="eef.lugar_id" data-live-search="true">
+                                    <ol class="nya-bs-select" ng-model="eef.lugar_id" data-live-search="true" required>
                                         <li class="nya-bs-option" data-value="{{option.id}}" ng-repeat="option in lugares| orderBy:'nombre'">
                                             <a>{{option.nombre}} - {{option.direccion}}</a>
                                         </li>
                                     </ol>
                                 </div>
                                 </br>
-                                <div class="form-group">
+                                <div class="form-group" ng-class="{'has-error':formeventos.fecha.$invalid && formeventos.fecha.$dirty}">
                                     <label for="gpr-Fecha">Fecha</label>
                                     </br>
-                                    <input time="false" date="true" mdc-datetime-picker="" type="text" id="date" placeholder="Date" ng-model="eef.fecha_evento" min-date="minDate" max-date="maxDate" class=" md-input">
+                                    <input time="false" date="true" mdc-datetime-picker type="text" id="date" placeholder="Date" ng-model="eef.fecha_evento" min-date="minDate" max-date="maxDate" class=" md-input" name="fecha" required>
                                 </div>
                                 </br>
-                                <div class="form-group">
+                                <div class="form-group" ng-class="{'has-error':formeventos.estatus.$invalid && formeventos.estatus.$dirty}">
                                     <label for="gpr-estatus">Estatus</label>
-                                    <select class="form-control" ng-init="eef.estatus='Activo'" ng-model="eef.estatus" name="gpr-estatus" id="gpr-estatus">
+                                    <select class="form-control" ng-init="eef.estatus='Activo'" ng-model="eef.estatus" name="estatus" id="gpr-estatus" required>
                                         <option value="Activo">Activo</option>
                                         <option value="Cancelado">Cancelado</option>
                                         <option value="Agotado">Agotado</option>
-                                    </select>
+                                    </select><span style="color:red" ng-if="formeventos.estatus.$invalid && formeventos.estatus.$dirty">campo requerido</span>
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6">
-                                <div class="form-group">
+                                <div class="form-group" ng-class="{'has-error':formeventos.categoria.$invalid && formeventos.categoria.$dirty}">
                                     <label for="gpr-Categoria">Categoria</label>
-                                    <select class="form-control" ng-model="eef.categoria" id="gpr-Categoria">
+                                    <select class="form-control" ng-model="eef.categoria" id="gpr-Categoria" name="categoria" required>
                                         <option value="Musica">Musica</option>
                                         <option value="Teatro">Teatro</option>
                                         <option value="Conciertos">Conciertos</option>
-                                    </select>
+                                    </select><span style="color:red" ng-if="formeventos.categoria.$invalid && formeventos.categoria.$dirty">campo requerido</span>
                                 </div>
                                 </br>
-                                <div class="form-group">
+                                <div class="form-group" ng-class="{'has-error':formeventos.direccion.$invalid && formeventos.direccion.$dirty}">
                                     <label for="gpr-Direccion">Direccion</label>
-                                    <input type="text" class="form-control" ng-model="eef.direccion" id="gpr-Direccion" placeholder="Direccion">
+                                    <input type="text" class="form-control" ng-model="eef.direccion" id="gpr-Direccion" name="direccion" placeholder="Direccion" required><span style="color:red" ng-if="formeventos.direccion.$invalid && formeventos.direccion.$dirty">campo requerido</span>
                                 </div>
                                 </br>
                                 <div class="form-group">
                                     <label for="gpr-Hora">Hora</label>
                                     </br>
-                                    <input date="false" time="true" mdc-datetime-picker="" type="text" id="Hora" placeholder="Time" format="hh:mm:ss" ng-model="eef.hora_evento" min-date="minDate" max-date="maxDate" class=" md-input">
+                                    <input mdc-datetime-picker date="false" time="true" type="text" id="Hora" placeholder="Time" format="hh:mm" ng-model="eef.hora_evento" min-date="minDate" max-date="maxDate" class="md-input" required>
                                 </div>
                             </div>
                         </div>
@@ -83,9 +83,9 @@
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="form-group">
-                                    <button ng-click="doGuardar()" type="submit" ng-bind="buttons.register" class="btn btn-evento">Guardar</button>
-                                    <button ng-click="eef=[];buttons.register='Guardar'" type="submit" class="btn btn-evento">Cancelar</button>
-                                    <button ng-click="doEliminar()" ng-bind="buttons.eliminar" type="submit" class="btn btn-evento">Eliminar</button>
+                                    <button ng-disabled='formeventos.$invalid' ng-click="doGuardar()" type="submit" ng-bind="buttons.register" class="btn btn-evento">Guardar</button>
+                                    <button ng-click="Cancelar();buttons.register='Guardar'" type="submit" class="btn btn-evento">Cancelar</button>
+                                    <button ng-click="doEliminar()" ng-bind="buttons.eliminar" type="submit" ng-show="myvalue" class="btn btn-evento">Eliminar</button>
                                 </div>
                             </div>
                             {{id}}
@@ -113,8 +113,8 @@
                             </thead>
                             <tbody ng-repeat="op in eventos.usuarios| filter:consultaPersonalizada">
                                 <tr>
-                                    <td>{{op.name}}</td>
-                                    <td>{{op.pivot.rol}}</td>
+                                    <td>{{::op.name}}</td>
+                                    <td>{{::op.pivot.rol}}</td>
                                     <td ng-click="editar(op.id)"><img src="images/cancelar.png"></td>
                                 </tr>
                             </tbody>
@@ -127,23 +127,25 @@
     </div>
 </div>
 <script type="text/ng-template" id="myModalContent.html">
-    <div class="gpr-form">
-        <div class="form-group">
-            <label for="gpr-Nombre">Usuario</label>
-            <input type="text" class="form-control" ng-model="eef.email" id="usuario" placeholder="Usuario">
+    <form name="formusuario" novalidate>
+        <div class="gpr-form">
+            <div class="form-group">
+                <label for="gpr-Nombre">Usuario</label>
+                <input type="text" class="form-control" ng-model="eef.email" id="usuario" placeholder="Usuario" required>
+            </div>
+            </br>
+            <div class="form-group">
+                <label for="gpr-Lugar">Rol de Usuario</label>
+                <select class="form-control" ng-model="eef.rol" id="rol" required>
+                    <option value="superadmin">SUPERADMIN</option>
+                    <option value="admin">ADMIN</option>
+                    <option value="user">USER</option>
+                </select>
+            </div>
         </div>
-        </br>
-        <div class="form-group">
-            <label for="gpr-Lugar">Rol de Usuario</label>
-            <select class="form-control" ng-model="eef.rol" id="rol">
-                <option value="superadmin">SUPERADMIN</option>
-                <option value="admin">ADMIN</option>
-                <option value="user">USER</option>
-            </select>
+        <div class="modal-footer">
+            <button ng-disabled='formusuario.$invalid' class="btn btn-evento" type="button" ng-click="ok()">GUARDAR</button>
+            <button class="btn btn-evento" type="button" ng-click="cancel()">CANCELAR</button>
         </div>
-    </div>
-    <div class="modal-footer">
-        <button class="btn btn-evento" type="button" ng-click="ok()">GUARDAR</button>
-        <button class="btn btn-evento" type="button" ng-click="cancel()">CANCELAR</button>
-    </div>
+    </form>
 </script>

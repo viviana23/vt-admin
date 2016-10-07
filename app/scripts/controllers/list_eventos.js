@@ -9,12 +9,7 @@
  */
 angular.module('panelNgApp')
   .controller('ListEventosCtrl',function($scope, lodash, $http, $location, config, tipo_zonasApi, eventosApi, $filter, $window) {
-       /* 
-       var query = eventosApi.query();
-            query.$promise.then(function(data) {
-
-            });
-*/
+      $scope.usuario = localStorage.getItem('usuario');
         eventosApi.get(function(data) {
             $scope.eventos = data.data;
 

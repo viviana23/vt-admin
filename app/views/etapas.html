@@ -21,31 +21,33 @@
             </div>
             <div class="row gpr-form">
                 <div class="col-lg-6 col-md-6 col-sm-6">
-                    <form>
+                    <form name="formetapas" novalidate>
                         <h4>ETAPAS</h4>
                         </br>
-                        <div class="form-group">
+                        <div class="form-group" ng-class="{'has-error':formetapas.nombre.$invalid && formetapas.nombre.$dirty}">
                             <label for="gpr-id">Nombre de la Etapa</label>
-                            <input type="text" class="form-control" ng-model="eef.descripcion" name="gpr-id" id="gpr-id" placeholder="Etapa">
+                            <input type="text" class="form-control" ng-model="eef.descripcion"  id="gpr-id" name="nombre" placeholder="Etapa" required>
+                            <span style="color:red" ng-if="formetapas.nombre.$invalid && formetapas.nombre.$dirty">campo requerido</span>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" ng-class="{'has-error':formetapas.inicio.$invalid && formetapas.inicio.$dirty}">
                             <label for="gpr-name">Fecha de Incio</label>
                             </br>
-                            <input time="false" date="true" mdc-datetime-picker="" type="text" id="fecha_inicio" placeholder="Fecha de Incio" ng-model="eef.fecha_inicio" min-date="minDate" max-date="maxDate" class=" md-input">
+                            <input name="inicio" time="false" date="true" mdc-datetime-picker="" type="text" id="fecha_inicio" placeholder="Fecha de Incio" ng-model="eef.fecha_inicio" min-date="minDate" max-date="maxDate" class=" md-input" required>
+                             <span style="color:red" ng-if="formetapas.inicio.$invalid && formetapas.inicio.$dirty">campo requerido</span>
                         </div>
                         <div class="form-group">
                             <label for="gpr-token">Fecha Fin</label>
                             </br>
-                            <input time="false" date="true" mdc-datetime-picker="" type="text" id="fecha_fin" placeholder="Fecha Fin" ng-model="eef.fecha_fin" min-date="minDate" max-date="maxDate" class=" md-input">
+                            <input time="false" date="true" mdc-datetime-picker="" type="text" id="fecha_fin" placeholder="Fecha Fin" ng-model="eef.fecha_fin" min-date="minDate" max-date="maxDate" class=" md-input" required>
                         </div>
                         </br>
                         </br>
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="form-group">
-                                     <button ng-click="doGuardar()" type="submit" class="btn btn-evento" ng-bind="buttons.register"></button>
-                                    <button ng-click="zef=[];buttons.register='Guardar'" type="submit" class="btn btn-evento">Cancelar</button>
-                                    <button  ng-click="doEliminar()" ng-bind="buttons.eliminar" type="submit" class="btn btn-evento">Eliminar</button>
+                                    <button ng-disabled="formetapas.$invalid" ng-click="doGuardar()" type="submit" class="btn btn-evento" ng-bind="buttons.register"></button>
+                                    <button ng-click="Cancelar();buttons.register='Guardar'" type="submit" class="btn btn-evento">Cancelar</button>
+                                    <button ng-click="doEliminar()" ng-bind="buttons.eliminar" type="submit" ng-show="myvalue" class="btn btn-evento">Eliminar</button>
                                 </div>
                             </div>
                         </div>
@@ -64,8 +66,8 @@
                         <tbody dir-paginate="op in eventos.etapas|itemsPerPage:4" pagination-id="detail">
                             <tr ng-click="editar(op.id)">
                                 <td>{{op.descripcion}}</td>
-                                <td>{{op.fecha_inicio}}</td>
-                                <td>{{op.fecha_fin}}</td>
+                                <td>{{op.fecha_inicio| date:'yyyy-MM-dd'}}</td>
+                                <td>{{op.fecha_fin | date:'yyyy-MM-dd'}}</td>
                                 <td><a>Editar</a></td>
                             </tr>
                         </tbody>

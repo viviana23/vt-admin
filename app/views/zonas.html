@@ -21,68 +21,79 @@
             </div>
             <div class="row gpr-form">
                 <div class="col-lg-6 col-md-6 col-sm-6">
-                    <form>
-                    
+                    <form name="formzonas" novalidate>
+                       
                         <h4>ZONAS DEL EVENTO</h4>
                         </br>
                         <div class="row ">
                             <div class="col-lg-6 col-md-6 col-sm-6">
-                                <div class="form-group">
+                                <div class="form-group" ng-class="{'has-error':formzonas.nombre.$invalid && formzonas.nombre.$dirty}">
                                     <label for="gpr-id">Nombre de Zona</label>
                                     </br>
-                                    <input type="text" class="form-control" ng-model="zef.nombre" id="gpr-Tipo" placeholder="nombre">
+                                    <input type="text" class="form-control" ng-model="zef.nombre" id="gpr-Tipo" name="nombre" placeholder="nombre" required>
+                                     <span style="color:red" ng-if="formzonas.nombre.$invalid && formzonas.nombre.$dirty">campo requerido</span>
                                 </div>
                                 </br>
-                                <div class="form-group">
+                                <div class="form-group" ng-class="{'has-error':formzonas.tipo_zona.$invalid && formzonas.tipo_zona.$dirty}">
                                     <label for="gpr-Color">Color de entrada</label>
                                     </br>
-                                    <ol class="nya-bs-select" ng-model="zef.tipo_zona_id" data-live-search="true">
+                                    <ol class="nya-bs-select" ng-model="zef.tipo_zona_id" data-live-search="true" name="tipo_zona" required>
                                         <li class="nya-bs-option" data-value="{{option.id}}" ng-repeat="option in tipo_zona">
                                             <a>{{option.color}}</a>
                                         </li>
                                     </ol>
+                                    <span ng-show="myForm.tipo_zona.$error.required">Select service</span>
                                 </div>
-                                 </br>
-                                <div class="form-group">
+                                </br>
+                                <div class="form-group" ng-class="{'has-error':formzonas.tipo_capacidad.$invalid && formzonas.tipo_capacidad.$dirty}">
                                     <label for="capacidad">Tipo de Capacidad</label>
-                                    <select class="form-control" ng-model="zef.capacidadtipo" id="gpr-Tipocapa">
+                                    <select class="form-control" name="tipo_capacidad" ng-model="zef.capacidadtipo" id="gpr-Tipocapa" required>
+                                       
                                         <option value="General">GENERAL</option>
                                         <option value="PorZona">POR FILAS</option>
                                     </select>
+                                    <span style="color:red" ng-if="formzonas.tipo_capacidad.$invalid && formzonas.tipo_capacidad.$dirty">campo requerido</span>
                                 </div>
                                 </br>
-                                <div class="form-group">
+                                <div class="form-group" ng-class="{'has-error':formzonas.precio.$invalid && formzonas.precio.$dirty}">
                                     <label for="gpr-Precio">Precio</label>
-                                    <input type="text" class="form-control" ng-model="zef.precio" id="gpr-Precio" placeholder="Precio">
+                                    <input type="text" class="form-control" name="precio" ng-model="zef.precio" id="gpr-Precio" placeholder="Precio" numbers-only="numbers-only" required>
+                                    <span style="color:red" ng-if="formzonas.precio.$invalid && formzonas.precio.$dirty">campo requerido</span>
                                 </div>
                                 </br>
-                                <div class="form-group">
+                                <div class="form-group"  ng-class="{'has-error':formzonas.iva.$invalid && formzonas.iva.$dirty}">
                                     <label for="gpr-Iva">Iva</label>
-                                    <input type="text" class="form-control" ng-model="zef.iva" id="gpr-Iva" placeholder="Iva">
+                                    <input type="text" class="form-control" ng-model="zef.iva" id="gpr-Iva" name="iva" placeholder="Iva" numbers-only="numbers-only" required>
+                                    <span style="color:red" ng-if="formzonas.iva.$invalid && formzonas.iva.$dirty">campo requerido</span>
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6">
-                                <div class="form-group">
+                                <div class="form-group"  ng-class="{'has-error':formzonas.estatus.$invalid && formzonas.estatus.$dirty}">
                                     <label for="gpr-Estatus">Estatus</label>
-                                    <select class="form-control" ng-init="zef.estado='Activo'" ng-model="zef.estado" id="gpr-Estatus">
+                                    <select class="form-control" ng-init="zef.estado='Activo'" ng-model="zef.estado" name="estatus" id="gpr-Estatus" required>
                                         <option value="Activo">ACTIVO</option>
                                         <option value="Cancelado">CANCELADO</option>
-                                    </select>                                </div>
+                                    </select>
+                                     <span ng-if="formzonas.estatus.$invalid && formzonas.estatus.$dirty" style="color:red">campo requerido</span>
+
+                                </div>
                                 </br>
-                                <div class="form-group">
+                                <div class="form-group" ng-class="{'has-error':formzonas.capacidad.$invalid && formzonas.capacidad.$dirty}">
                                     <label for="gpr-Capacidad">Capacidad</label>
-                                    <input type="text" class="form-control" name="Capacidad" ng-model="zef.capacidad" id="gpr-Capacidad" placeholder="Capacidad" required>
-                                    <span ng-show="formzonas.capacidad.$error.required"></span>
+                                    <input type="text" class="form-control" name="capacidad" ng-model="zef.capacidad"  id="gpr-Capacidad" placeholder="Capacidad" numbers-punto="numbers-punto" required>
+                                   <span ng-if="formzonas.capacidad.$invalid && formzonas.capacidad.$dirty" style="color:red">campo requerido</span>
                                 </div>
                                 </br>
-                                <div class="form-group">
+                                <div class="form-group"  ng-class="{'has-error':formzonas.comision.$invalid && formzonas.comision.$dirty}">
                                     <label for="gpr-Comision">Comision</label>
-                                    <input type="text" class="form-control" ng-model="zef.comision" id="gpr-Comision" placeholder="Comision">
+                                    <input type="text" class="form-control" ng-model="zef.comision" id="gpr-Comision" name="comision" placeholder="Comision" numbers-only="numbers-only" required>
+                                    <span ng-if="formzonas.comision.$invalid && formzonas.comision.$dirty" style="color:red">campo requerido</span>
                                 </div>
                                 </br>
-                                <div class="form-group">
+                                <div class="form-group" ng-class="{'has-error':formzonas.impuesto.$invalid && formzonas.impuesto.$dirty}">
                                     <label for="gpr-Impuesto">Impuesto</label>
-                                    <input type="text" class="form-control" ng-model="zef.impuesto" id="gpr-Impuesto" placeholder="Impuesto">
+                                    <input type="text" class="form-control" ng-model="zef.impuesto" id="gpr-Impuesto" name="impuesto" placeholder="Impuesto" numbers-only="numbers-only" required>
+                                    <span  ng-if="formzonas.impuesto.$invalid && formzonas.impuesto.$dirty" style="color:red">campo requerido</span>
                                 </div>
                             </div>
                         </div>
@@ -91,9 +102,9 @@
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="form-group">
-                                    <button ng-click="doGuardar()" type="submit" class="btn btn-evento" ng-bind="buttons.register"></button>
-                                    <button ng-click="zef=[];buttons.register='Guardar'" type="submit" class="btn btn-evento">Cancelar</button>
-                                    <button  ng-click="doEliminar()" ng-bind="buttons.eliminar" type="submit" class="btn btn-evento">Eliminar</button>
+                                   <button ng-disabled="formzonas.$invalid" ng-click="doGuardar()" type="submit" class="btn btn-evento" ng-bind="buttons.register"></button>
+                                    <button ng-click="Cancelar();buttons.register='Guardar'" type="submit" class="btn btn-evento">Cancelar</button>
+                                    <button ng-click="doEliminar()" ng-bind="buttons.eliminar" type="submit" ng-show="myvalue" class="btn btn-evento">Eliminar</button>
                                 </div>
                             </div>
                         </div>
@@ -106,12 +117,12 @@
                                 <th>Zona</th>
                                 <th>Tipo Capacidad</th>
                                 <th>Capacidad</th>
-                                 <th>Precio</th>
+                                <th>Precio</th>
                                 <th></th>
                             </tr>
                         </thead>
                         <tbody dir-paginate="op in eventos.zonas|itemsPerPage:8" pagination-id="detail">
-                            <tr  ng-click="editar(op.id,$index)">
+                            <tr ng-click="editar(op.capacidadtipo,op.id,$index)">
                                 <td>{{op.nombre}}</td>
                                 <td>{{op.capacidadtipo}}</td>
                                 <td>{{op.capacidad}}</td>

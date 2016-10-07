@@ -266,6 +266,7 @@ body {
         padding-right: 10px;
         background-color: $theblue;
         color: $somewhite;
+        
         th {
             @include getFont(400);
             text-align: center;
@@ -331,11 +332,6 @@ body {
     }
 }
 
-#scrollable-area {
-    height: 450px;
-    overflow-y: scroll;
-    /* <-- here is what is important*/
-}
 
 .alto-panel {
     height: 500px;

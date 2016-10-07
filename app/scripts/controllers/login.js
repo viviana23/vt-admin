@@ -12,7 +12,7 @@ angular.module('panelNgApp')
         $scope.email = "gKuphal@example.com";
         $scope.doLogin = function() {
             $http({
-                url: 'http://localhost:8080/api/v1/angular2login',
+                url: 'http://192.168.0.102:8080/api/v1/angular2login',
                 method: 'POST',
                 data: { email: $scope.email, password: $scope.password }
             }).then(function(response) {

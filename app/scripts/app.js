@@ -24,10 +24,11 @@ angular
         'angularMoment',
         'xeditable',
         'ngLodash',
-        'ngFlash',
+        'flash',
         'ui.bootstrap',
+        'ng-sweet-alert',
+       
         'angularUtils.directives.dirPagination'
-
 
     ])
     .config(function($routeProvider) {
@@ -78,29 +79,34 @@ angular
                 controllerAs: 'filas'
             })
             .when('/zonaetapa', {
-              templateUrl: 'views/zonaetapa.html',
-              controller: 'ZonaetapaCtrl',
-              controllerAs: 'zonaetapa'
+                templateUrl: 'views/zonaetapa.html',
+                controller: 'ZonaetapaCtrl',
+                controllerAs: 'zonaetapa'
             })
             .when('/evento_usuario', {
-              templateUrl: 'views/evento_usuario.html',
-              controller: 'EventoUsuarioCtrl',
-              controllerAs: 'eventoUsuario'
+                templateUrl: 'views/evento_usuario.html',
+                controller: 'EventoUsuarioCtrl',
+                controllerAs: 'eventoUsuario'
             })
             .when('/list_eventos', {
-              templateUrl: 'views/list_eventos.html',
-              controller: 'ListEventosCtrl',
-              controllerAs: 'listEventos'
+                templateUrl: 'views/list_eventos.html',
+                controller: 'ListEventosCtrl',
+                controllerAs: 'listEventos'
             })
             .when('/usuarios', {
-              templateUrl: 'views/usuarios.html',
-              controller: 'UsuariosCtrl',
-              controllerAs: 'usuarios'
+                templateUrl: 'views/usuarios.html',
+                controller: 'UsuariosCtrl',
+                controllerAs: 'usuarios'
             })
             .when('/list_zonas', {
-              templateUrl: 'views/list_zonas.html',
-              controller: 'ListZonasCtrl',
-              controllerAs: 'listZonas'
+                templateUrl: 'views/list_zonas.html',
+                controller: 'ListZonasCtrl',
+                controllerAs: 'listZonas'
+            })
+            .when('/devolucion', {
+                templateUrl: 'views/devolucion.html',
+                controller: 'DevolucionCtrl',
+                controllerAs: 'devolucion'
             })
             .otherwise({
                 redirectTo: '/'
@@ -113,7 +119,7 @@ angular
         }];
         $httpProvider.interceptors.push('jwtInterceptor');
     }).constant("config", {
-        "url": "http://localhost:8080/api",
+        "url": "http://192.168.0.102:8080/api",
         "port": "80"
     }).config(function($mdDateLocaleProvider) {
         $mdDateLocaleProvider.formatDate = function(date) {

@@ -26,28 +26,28 @@
                             <ng-form name="nestedForm">
                                 </br>
                                 <div class="col-lg-6 col-md-6 col-sm-6">
-                                    <div class="row ">
+                                    <div class="row">
                                         <div class="col-lg-6 col-md-6 col-sm-6">
                                             <div class="form-group">
                                                 <label for="Descripcion">Descripcion</label>
-                                                <input type="text" class="form-control" ng-model="fef.descripcion" name="descripcion" id="descripcion" placeholder="Descripcion">
+                                                <input type="text" class="form-control" ng-model="fef.descripcion" name="descripcion" id="descripcion" placeholder="Descripcion" required>
                                             </div>
                                             <div class="form-group">
                                                 <label for="Capacidad">Capacidad</label>
-                                                <input type="text" class="form-control" ng-model="fef.capacidad" name="capacidad" id="capacidad" placeholder="capacidad">
+                                                <input type="text" class="form-control" ng-model="fef.capacidad" name="capacidad" id="capacidad" placeholder="capacidad" required>
                                             </div>
                                         </div>
                                         <div class="col-lg-6 col-md-6 col-sm-6">
                                             <div class="form-group">
                                                 <label for="Tipo">Tipo</label>
-                                                <select class="form-control" ng-model="fef.tipo" id="gpr-Estatus">
+                                                <select class="form-control" ng-model="fef.tipo" id="gpr-Estatus" name="tipo" required>
                                                     <option value="Mesa">MESA</option>
                                                     <option value="Fila">FILA</option>
                                                 </select>
                                             </div>
                                             <div class="form-group">
                                                 <label for="Estatus">Estatus</label>
-                                                <select class="form-control" ng-init="fef.estatus='Activo'" ng-model="fef.estatus" id="gpr-Estatus">
+                                                <select class="form-control" ng-init="fef.estatus='Activo'" name="estatus" ng-model="fef.estatus" id="gpr-Estatus" required>
                                                     <option value="Activo">ACTIVO</option>
                                                     <option value="inactivo">INACTIVO</option>
                                                     <option value="bloqueado">BLOQUEADO</option>
@@ -60,8 +60,9 @@
                                     <div class="row ">
                                         <div class="col-lg-12 ">
                                             <div class="form-group">
-                                                <button ng-click="doGuardar(fef)" type="submit" class="btn btn-evento" ng-bind="buttons.register">Guardar</button>
-                                                <button ng-click="fef=[];buttons.register='Guardar'" type="submit" class="btn btn-evento">Cancelar</button>
+                                                <button ng-disabled='outerForm.$invalid' ng-click="doGuardar(fef)" type="submit" class="btn btn-evento" ng-bind="buttons.register"></button>
+                                                <button ng-click="Cancelar();buttons.register='Guardar'" type="submit" class="btn btn-evento">Cancelar</button>
+                                                <button ng-click="doEliminar()" ng-bind="buttons.eliminar" ng-show="myvalue" ng-animate="'box'" type="submit" class="btn btn-evento">Eliminar</button>
                                             </div>
                                         </div>
                                     </div>
@@ -78,7 +79,7 @@
                                                 <th></th>
                                             </tr>
                                         </thead>
-                                        <tbody >
+                                        <tbody>
                                             <tr dir-paginate="op in eventos.zonas[indexzonas].filas | filter:consultaPersonalizada |itemsPerPage:4 " pagination-id="detail" ng-click="editar(op.id,$index)">
                                                 <td>{{op.descripcion}}</td>
                                                 <td>{{op.tipo}}</td>
@@ -88,16 +89,16 @@
                                             </tr>
                                         </tbody>
                                     </table>
-                                     <div class="text-center">
-                        <dir-pagination-controls max-size="5" pagination-id="detail" direction-links="true" boundary-links="true">
-                        </dir-pagination-controls>
-                    </div>
+                                    <div class="text-center">
+                                        <dir-pagination-controls max-size="5" pagination-id="detail" direction-links="true" boundary-links="true">
+                                        </dir-pagination-controls>
+                                    </div>
                                 </div>
                             </ng-form>
                         </uib-tab>
                         <uib-tab index="1" heading="Con Mapa">
                             </br>
-                             </br>
+                            </br>
                             <div class="row ">
                                 <div class="col-lg-6 ">
                                     <div class="panel panel-default alto-panel">
@@ -110,8 +111,7 @@
                                     </div>
                                     <button ng-click="doGuardarmapa(fef)" type="submit" class="btn btn-evento" ng-bind="buttons.register"></button>
                                     <button ng-click="fef=[];buttons.register='Guardar'" type="submit" class="btn btn-evento">Cancelar</button>
-                                    <button  ng-click="doEliminar()" ng-bind="buttons.eliminar" type="submit" class="btn btn-evento">Eliminar</button>
-                                    
+                                    <button ng-click="doEliminar()" ng-bind="buttons.eliminar" type="submit" class="btn btn-evento">Eliminar</button>
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-6">
                                     <div class="panel panel-default alto-panel">

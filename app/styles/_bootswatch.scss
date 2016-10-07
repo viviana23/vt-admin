@@ -69,7 +69,7 @@
   text-transform: uppercase;
   border: none;
   @include box-shadow(1px 1px 4px rgba(0,0,0,.4));
-  @include transition(all 0.4s);
+  @include transition(all 0s);
 
   &-link {
     border-radius: $btn-border-radius-base;
@@ -327,7 +327,7 @@ input[type="checkbox"],
     width: 18px;
     height: 18px;
     margin-top: -2px;
-    margin-right: 5px;
+   margin-left: 65px;
     border: 2px solid $gray;
     border-radius: 2px;
     @include transition(240ms);
@@ -337,7 +337,7 @@ input[type="checkbox"],
     content: "";
     position: absolute;
     top: 0;
-    left: 6px;
+    left: 71px;
     display: table;
     width: 6px;
     height: 12px;
